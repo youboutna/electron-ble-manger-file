@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>electron-ble-manger-file (إدارة ملفتات عن طريق بلوتوث)</title>
+   
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">electron-ble-manger-file </a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+       <h2>إدارة ملفتات عن طريق بلوتوث</h2>
+          <p> We are using Node.js <script>document.write(process.versions.node)</script>,
+    Chromium <script>document.write(process.versions.chrome)</script>,
+    and Electron <script>document.write(process.versions.electron)</script>.</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+        
+    <div class="row">
+        <div class="col-md-4">
+    
+        <div class="container-fluid" id="listed-files"> list of folder</div>
+        </div>
+        
+      <div class="row">
+        <div class="col-md-4">
+          <h2>Electron with Chrome WebBluetooth AP</h2>
+        </div>
+        <div class="col-md-4">
+          <h2>Get device info</h2>
+      
+  <label for="allDevices">All Devices</label>
+  <input id="allDevices" type="checkbox">
+  <input id="service" type="text" size=17 list="services" placeholder="Bluetooth Service">
+  <input id="name" type="text" size=17 placeholder="Device Name">
+  <input id="namePrefix" type="text" size=17 placeholder="Device Name Prefix">
+  <button id="get-device-info">Log Bluetooth Device Info</button>
+       </div>
+        <div class="col-md-4">
+          <h2>>Get heart rate data</h2>
+          <p></p>
+         <button id="get-heart-rate">Get Heart Rate</button>
+        </div>
+            
+               <div class="col-md-4">
+          <h2>Set heart rate data</h2>
+  <p>Send a number to your bluetooth device, and see the value there.</p>
+  <input id="set-heart-rate-value" value="1" type="number" size=17 placeholder="Type value">
+  <button id="set-heart-rate">Set Heart Rate</button>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>© hadratech 2018</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/font-awesome.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script>
+    window.$ = window.jQuery = require('jquery');
+    require('./renderer.js');
+    </script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/getDevices.js"></script>
+  </body>
+</html>

@@ -1,7 +1,6 @@
 # ElectronBLEMangerFile
 # Application use nodejs Electron library to manager file with Bluetooth 
 
-
 ## Installing
 ## install nodejs 
 
@@ -26,5 +25,6 @@ npm install --global node-gyp
   # Aller dans le dossier- got to file folder  
   $ cd electron-ble-manger-file
   # Installer les dépendances et lancer l'application- build and run the application
-$ npm install && npm run build && npm start
+$ npm install && npm run build && npm start ####### if not work ####################
+$   npm install &&  npm start
  

@@ -1,57 +1,68 @@
-const {
-  app,
-  BrowserWindow,
-  ipcMain
-} = require('electron')
+// Modules to control application life and create native browser window
+const {app, BrowserWindow,webContents,ipcMain} = require('electron')
 
-const electron = require('electron')
+// Keep a global reference of the window object, if you don't, the window will
+// be closed automatically when the JavaScript object is garbage collected.
+let mainWindow
 
-const electronConnect = require('electron-connect');
+function createWindow () {
+  // Create the browser window.
+  mainWindow = new BrowserWindow({width: 800, height: 600})
 
-let win
+  // and load the index.html of the app.
+  mainWindow.loadFile('index.html')
 
-function createWindow() {
+  // Open the DevTools.
+   mainWindow.webContents.openDevTools()
 
-  const _width = 1200, _height = 800
-  win = new BrowserWindow({
-      width: _width,
-      height: _height,
-      minWidth: 800,
-      minHeight: 600,
-      icon: './assets/img/icon.png'
+  // Emitted when the window is closed.
+  mainWindow.on('closed', function () {
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
+    mainWindow = null
   })
 
-  try {
-      const screenSize = electron.screen.getPrimaryDisplay().size;
-      win.setPosition((screenSize.width - _width) / 2,
-          (screenSize.height - _height) / 2)
-  }
-  catch (er) {
-      win.center()
-  }
-
-  win.setMenu(null)
-
-  win.loadURL(`file://${__dirname}/bundle/index.html`)
-
-  const client = electronConnect.client.create(win);
-
-  win.on("closed", () => {
-      win = null;
-      client.sendMessage('closed');
-  });
-
+  app.commandLine.appendSwitch('enable-web-bluetooth') 
+  app.on('ready', () => {
+     webContents.on('select-bluetooth-device', (event, deviceList, callback) => 
+     { event.preventDefault() 
+      console.log(deviceList)
+      let result = deviceList.find((device) => 
+      { 
+        console.log(device.deviceName+ " devicename : " + device)
+        return device.deviceName }) 
+      if (!result) { callback('') } else { callback(result.deviceId) } }) })
 }
 
-app.on("ready", createWindow)
+// This method will be called when Electron has finished
+// initialization and is ready to create browser windows.
+// Some APIs can only be used after this event occurs.
+app.on('ready', createWindow)
 
-app.on("window-all-closed", () => {
-  app.quit()
+// Quit when all windows are closed.
+app.on('window-all-closed', function () {
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
 
-app.on("activate", () => {
-
-  if (win === null)
-      createWindow()
-
+app.on('activate', function () {
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
+  if (mainWindow === null) {
+    createWindow()
+  }
 })
+
+// In this file you can include the rest of your app's specific main process
+// code. You can also put them in separate files and require them here.
+
+//function callback for bluetooth devices
+
+
+function callback(deviceList){
+console.log(deviceList)
+}
